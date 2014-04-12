@@ -1,0 +1,45 @@
+/* http://colorschemedesigner.com/#3911Tw0w0w0w0 */
+.bg-dull {
+    background-color: #1f7d63;
+}
+.bg-light{
+    background-color: #5fd3b3
+}
+.bg-base {
+    background-color: #00A779;
+}
+
+.bg-bright {
+    background-color: #35d3a7;
+}
+
+.bg-dark {
+    background-color: #006d4f;
+}
+
+
+.spacer {
+    height: 15px;
+}
+
+.spacer-lg {
+    height: 30px;
+}
+
+
+.dark {
+    color: #006d4f;
+}
+
+.font-silly{
+    font-family: 'Gloria Hallelujah', cursive;
+}
+
+
+.font-on-dark {
+    color: #FFFFFF;
+}
+
+.section {
+    max-height: 500px;
+}
