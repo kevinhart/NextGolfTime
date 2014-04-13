@@ -7,9 +7,9 @@ myApp.config(function ($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise("/home");
     //
     // Now set up the states
-    $stateProvider.state('signup', {
-        url: "/signup",
-        templateUrl: "partials/signup.html"
+    $stateProvider.state('signin', {
+        url: "/signin",
+        templateUrl: "partials/signin.html"
     }).state('home', {
         url: "/home",
         templateUrl: "partials/home.html"
