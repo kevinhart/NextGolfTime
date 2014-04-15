@@ -1,3 +1,18 @@
+
+body, p{
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 300;
+}
+
+h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6{
+    font-weight: 400;
+}
+
+.lead{
+    font-weight: 300;
+}
+
+
 /* http://colorschemedesigner.com/#3911Tw0w0w0w0 */
 .bg-dull {
     background-color: #1f7d63;
@@ -26,6 +41,9 @@
     height: 30px;
 }
 
+.spacer-xl{
+    height: 60px;
+}
 
 .dark {
     color: #006d4f;
@@ -40,6 +58,32 @@
     color: #FFFFFF;
 }
 
-.section {
-    max-height: 500px;
+
+.bg-hero {
+    background: url('../img/golf-bkg.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    /*min-height: 400px;*/
+    color: black;    
+}
+
+.bold{
+    font-weight: 700;
+}
+.full-width {
+    width: 100%;
+}
+
+.header, .footer {
+    background-color: #2E3137;
+    color: #fff;
+}
+
+.form-width {
+    max-width: 400px;
+}
+
+.login-google {
+    background-color: #F90101;
+    color: #fff;
 }
