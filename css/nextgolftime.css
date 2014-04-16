@@ -79,11 +79,77 @@ h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6{
     color: #fff;
 }
 
+.header{
+    height: 40px;
+    line-height: 40px;
+}
+
+.brand{
+    font-weight: 400;
+    font-size: 18px;
+    padding-left: 20px;
+    padding-top: 15px;
+    color: #999;
+}
+
+.header a{
+    text-decoration: none;
+    color: #999;
+}
+
+.header a:hover{
+    color: #fff;
+}
+
 .form-width {
     max-width: 400px;
 }
 
-.login-google {
-    background-color: #F90101;
-    color: #fff;
+
+.nudge-left{
+    padding-right: .4em;
 }
+.nudge-right {
+    padding-left: .4em;
+}
+
+
+.login{
+    padding-left: 1.25em;
+    padding-right: 1.25em;
+}
+
+.login i{
+    opacity: 1;
+}
+
+.login i:hover{
+    opacity: .65;
+}
+
+.login.facebook {
+    color:#3B5998;
+}
+
+.login.twitter{
+    color: #55ACEE;
+}
+
+.login.google{
+    color: #F90101;
+}
+
+.login.windows{
+    color: #A200FF;    
+}
+
+.signin-control {
+    max-width: 500px;
+}
+
+.btn-hero {
+    min-width: 150px;
+    max-width: 300px;
+}
+
+
