@@ -1,17 +1,5 @@
-angular.module('myApp').controller('SignInCtrl', function ($scope, $state, $stateParams, $location, MobileServiceClient, User) {
+angular.module('myApp').controller('SignInCtrl', function ($scope, $state, $stateParams, $location, ClientService, User) {
   
-    
-   /* $scope.loadData = function(){
-        MobileServiceClient.getTable('Group')
-        .read()
-        .then(function(items){
-              console.log(items);
-              $scope.groups = items;
-          }).done(function(results){
-            console.log(results);
-            $scope.$apply();
-        });
-    };*/
     
     $scope.login = function(vendor){
         if (vendor != 'google'){
@@ -19,16 +7,17 @@ angular.module('myApp').controller('SignInCtrl', function ($scope, $state, $stat
             return;
         }
         console.log("login function");
-        MobileServiceClient.login(vendor).then(function(){
+        ClientService.login(vendor).then(function(){
             
         }).done(function()
                 {                    
-                    MobileServiceClient
+                    ClientService
                         .invokeApi('userInfo', { method: "GET"})
                         .done(function(results){                             
                              var retData = JSON.parse(results.response);
-                             User.signIn(retData.name, retData.email);
-                            $scope.$apply();
+                            console.log('current user: ' + JSON.stringify(ClientService.currentUser));
+                             User.signIn(retData.name, retData.email);                            
+//                            $scope.$apply();
                             $state.go('home');
                          });
                 });

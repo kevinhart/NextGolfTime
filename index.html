@@ -36,9 +36,9 @@
 <div class="header" ng-controller="HeaderCtrl">
     <a class="brand" href="#">Next Golf Time</a>    
     <span class="pull-right nudge-left">
-        <span ng-show="user.valid">{{user.userName}} - {{user.email}}</span>
-        <a href="#/signout" ng-show="user.valid">Sign Out</a>
-        <a href="#/signin" ng-show="!user.valid">Sign In</a>
+        <span ng-show="user.validSession">{{user.userName}} - {{user.email}}</span>
+        <a href="#/signout" ng-show="user.validSession">Sign Out</a>
+        <a href="#/signin" ng-show="!user.validSession">Sign In</a>
     </span>
 </div>
 

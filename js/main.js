@@ -25,43 +25,52 @@ myApp.config(function ($stateProvider, $urlRouterProvider) {
 
 
 
-myApp.factory('MobileServiceClient', function () {
+myApp.factory('ClientService', function () {
     console.log('creating new azure mobile service client');
     
     return new WindowsAzure.MobileServiceClient(
     "https://nextgolftime.azure-mobile.net/",
     "GpmfHejvmcsPIJBlCeveEJsbqzltwv68");
+    
 });
 
 
-myApp.factory('User', function() {
+myApp.factory('User', function(ClientService) {
 
+    console.log('new User service');    
+    
     var user = {};
     
     user.userName = localStorage.getItem('NGT.userName');
     user.email = localStorage.getItem('NGT.email');
-    user.valid = localStorage.getItem('NGT.validSession') === 'true';
+    user.validSession = user.userName && user.userName.length > 0;
+    
+    if(user.validSession){
+        ClientService.currentUser = JSON.parse(localStorage.getItem('NGT.currentUser'));
+    }
     
     user.signIn = function(userName, email){
         localStorage.setItem('NGT.userName', userName);
-        localStorage.setItem('NGT.email', email);
-        localStorage.setItem('NGT.validSession', 'true');
+        localStorage.setItem('NGT.email', email);        
+        localStorage.setItem('NGT.currentUser', JSON.stringify(ClientService.currentUser));
         
         user.userName = userName;
         user.email = email;
-        user.valid = true;
+        user.validSession = true;
         
     };
     
     user.signOut = function(){
-        console.log('sign out');
-        localStorage.setItem('NGT.validSession', 'false');
+            
         localStorage.setItem('NGT.userName', '');
         localStorage.setItem('NGT.email', '');
+        localStorage.setItem('NGT.currentUser', '');
+        
+        ClientService.logout();
         
         user.userName = '';
         user.email = '';
-        user.valid = false;
+        user.validSession = false;
         
     };
     
