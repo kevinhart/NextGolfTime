@@ -1,11 +1,26 @@
 <div ng-controller="HomeCtrl">
 
     
+    <div class="container" ng-show="groups.length == 0">
+        <div class="row">
+            <div class="col-xs-12 text-center page-header">
+                <h1>Welcome {{user.userName}}</h1>
+            </div>
+        </div>
 
-<div class="text-center page-header">
-<h1>Welcome {{user.userName}} <small>to awesomeness</small></h1>
+        <div class="row text-center">
+                <h3>It looks like you are just getting started.</h3>                
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <h4>Join an existing group</h4><p class="muted">Has someone already created and group and you would like to join?  Simply enter the group name below to proceed.</p>
+                <button class="btn btn-primary btn-join center-block"><i class="fa fa-plus nudge-left"></i>Join Group</button>            
+            </div>
+            <div class="col-sm-6">
+                
+                <h4>Create a new group</h4><p class="muted">Want to start your own group?  It's easy.  All you'll need is a unique name and some friends to invite.</p>
+                <button class="btn btn-primary btn-join center-block"><i class="fa fa-plus nudge-left"></i>Create Group</button>    
+            </div>
+        </div>
+    </div>
 </div>
-
-
-</div>
-

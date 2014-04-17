@@ -41,6 +41,7 @@ myApp.factory('User', function(ClientService) {
     
     var user = {};
     
+    user.id = localStorage.getItem('NGT.id');
     user.userName = localStorage.getItem('NGT.userName');
     user.email = localStorage.getItem('NGT.email');
     user.validSession = user.userName && user.userName.length > 0;
@@ -49,7 +50,8 @@ myApp.factory('User', function(ClientService) {
         ClientService.currentUser = JSON.parse(localStorage.getItem('NGT.currentUser'));
     }
     
-    user.signIn = function(userName, email){
+    user.signIn = function(userName, email, id){
+        localStorage.setItem('NGT.id', id);
         localStorage.setItem('NGT.userName', userName);
         localStorage.setItem('NGT.email', email);        
         localStorage.setItem('NGT.currentUser', JSON.stringify(ClientService.currentUser));
@@ -61,18 +63,25 @@ myApp.factory('User', function(ClientService) {
     };
     
     user.signOut = function(){
-            
+        
+        localStorage.setItem('NGT.id', '');
         localStorage.setItem('NGT.userName', '');
         localStorage.setItem('NGT.email', '');
         localStorage.setItem('NGT.currentUser', '');
         
         ClientService.logout();
         
+        user.id = '';
         user.userName = '';
         user.email = '';
         user.validSession = false;
         
     };
+    
+    user.setID = function(id){
+        localStorage.setItem('NGT.id', id);
+        user.id = id;
+    }
     
     return user;
 });

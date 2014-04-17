@@ -7,13 +7,17 @@ angular.module('myApp').controller('HomeCtrl', function ($scope, $state, User, C
     
     $scope.user = User;
     
-    //we need to figure out if the user profile is complete
-    ClientService.getTable('Profile')
-        .insert({userName: User.email})
-        .done(function (results){
-            console.log(results);
-    });
-
+    $scope.groups = [];
+    
+    if(!User.id){
+        console.log('looking up user');
+        //we need to figure out if the user profile is complete
+        ClientService.getTable('Profile')
+            .insert({userName: User.email})
+            .done(function (results){
+                User.setID(results.id);
+        });
+    }
 
     
 });

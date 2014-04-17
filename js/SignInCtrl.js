@@ -14,10 +14,8 @@ angular.module('myApp').controller('SignInCtrl', function ($scope, $state, $stat
                     ClientService
                         .invokeApi('userInfo', { method: "GET"})
                         .done(function(results){                             
-                             var retData = JSON.parse(results.response);
-                            console.log('current user: ' + JSON.stringify(ClientService.currentUser));
-                             User.signIn(retData.name, retData.email);                            
-//                            $scope.$apply();
+                             var retData = JSON.parse(results.response);                            
+                             User.signIn(retData.name, retData.email, '');                            
                             $state.go('home');
                          });
                 });

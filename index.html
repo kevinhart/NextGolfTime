@@ -34,7 +34,7 @@
 <body >
 
 <div class="header" ng-controller="HeaderCtrl">
-    <a class="brand" href="#">Next Golf Time</a>    
+    <a class="brand" ng-href="{{user.validSession ? '#/home' : '#'}}">Next Golf Time</a>    
     <span class="pull-right nudge-left">
         <span ng-show="user.validSession">{{user.userName}} - {{user.email}}</span>
         <a href="#/signout" ng-show="user.validSession">Sign Out</a>
