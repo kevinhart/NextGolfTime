@@ -19,5 +19,7 @@ angular.module('myApp').controller('HomeCtrl', function ($scope, $state, User, C
         });
     }
 
-    
+    if($scope.groups.length === 0){
+        $state.go("home.new");
+    }
 });

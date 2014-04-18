@@ -158,3 +158,21 @@ h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6{
     width: 175px;
 }
 
+
+.home-content {
+
+}
+
+.side-nav {
+    margin-top: 15px;
+    border-right: 1px solid #999;
+    text-align: center;
+}
+    
+.side-nav ul li a{
+    color: black;
+}
+.side-nav ul li a:hover{
+    color: #999;
+    background-color: white;
+}
