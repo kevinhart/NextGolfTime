@@ -19,7 +19,7 @@ myApp.config(function ($stateProvider, $urlRouterProvider) {
         templateUrl: "partials/signout.html"
     }).state('home', {
         url:"/home",
-        templateUrl: "partials/home.html"        
+        templateUrl: "partials/home.html",
     }).state('home.new', {
         url:"/new",
         templateUrl: "partials/home-new.html"
@@ -31,7 +31,10 @@ myApp.config(function ($stateProvider, $urlRouterProvider) {
         templateUrl: "partials/comments.html"
     }).state('home.groups', {
         url:"/groups",
-        templateUrl: "partials/groups.html"
+        templateUrl: "partials/home-groups.html"
+    }).state('groups-create-new', {
+        url:"/groups/create-new",
+        templateUrl: "partials/groups-create-new.html"
     });
 });
 
@@ -97,4 +100,6 @@ myApp.factory('User', function(ClientService) {
     
     return user;
 });
+
+
 

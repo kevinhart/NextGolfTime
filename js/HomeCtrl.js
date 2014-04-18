@@ -2,6 +2,7 @@ angular.module('myApp').controller('HomeCtrl', function ($scope, $state, User, C
     
     //TBD: if not logged in, redirect to sign in
     if(!User.validSession){
+        console.log('redirect to sign in - invalid session');
         $state.go('signin');
     }
     
@@ -19,7 +20,17 @@ angular.module('myApp').controller('HomeCtrl', function ($scope, $state, User, C
         });
     }
 
-    if($scope.groups.length === 0){
+    //if there are any events, go there
+    //else if there are any comments, go there
+    //else if there are any groups, go there
+    // else new
+    if($scope.events && $scope.events.length > 0){
+        $state.go("home.schedule");
+    }else if($scope.comments && $scope.comments.length > 0){
+        $state.go("home.comments");
+    }if($scope.groups && $scope.groups.length > 0){
+        $state.go("home.groups");
+    }else{
         $state.go("home.new");
     }
 });
