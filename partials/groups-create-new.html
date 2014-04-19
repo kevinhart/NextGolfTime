@@ -1,25 +1,67 @@
 <div class="container" ng-controller="NewGroupCtrl">
     <div class="page-header">
-        <h1>Create a new group <small>simple. easy. fun.</small></h1>
-        <p class="text-muted">A group will allow you to create a collection of friends that want to play golf together.</p>
+        <h1>create a new group <small>quick and simple</small></h1>
+        <p class="text-muted">groups allow you to create a collection of friends that want to play golf together</p>
     </div>
 
-    <h3>Rules for creating a new group</h3>
-    <ul class="text-muted">
-        <li>Group name must be unique</li>
-        <li>Group name must be at least 10 characters</li>
-        <li>Administration of a group can be shared/updated after it is created</li>
-    </ul>
+    <div class="row">
+        <div class="col-xs-12">
+            <h3>things to know</h3>
+            <h5><i class="fa fa-chevron-right nudge-left"></i><strong>privacy</strong></h5>
+            <ul class="no-bullets">
+                <li><strong>public: </strong> searchable and open to everyone without the need for invites or accepts</li>
+                <li><strong>semi-private: </strong> searchable, but requests to join must be accepted</li>
+                <li><strong>private: </strong> the only way to find or join this group is to have an invitation</li>
+            </ul>
+            <h5><i class="fa fa-chevron-right nudge-left"></i><strong>names</strong></h5>
+            <ul class="no-bullets">
+                <li><strong>length: </strong> group names must be between <strong>5 - 50</strong> characters</li>
+                <li><strong>quality: </strong> if the group is public or semi-private, people will be able to find you based on the name</li>
+                <li><strong>changes: </strong> you can change the name of a group at any time</li>
+                <li><strong>description: </strong> describe your group.  it'll help people find you if there are other groups with the same name</li>
+            </ul>
+        </div>
+    </div>
     
     
-    <form role="form" class="new-group-form">
+    <h3>ready when you are <small>enter name and description</small></h3>
+    <form name="newGroupForm" role="form" class="form-horizontal new-group-form" ng-submit="createGroup(newGroupForm.$valid)" novalidate >
         <div class="form-group">
-            <label for="groupName">Group name</label>
-            <input type="text" class="form-control" id="new-group-name" placeholder="Unique group name" ng-model="groupName" ng-minlength="10">
+            <label for="groupName" class="col-sm-3 control-label">group name</label>
+            <div class="col-sm-9">
+                <input type="text" 
+                       class="form-control" 
+                       name="groupName" 
+                       placeholder="a fantastic name" 
+                       ng-model="groupName"                        
+                       ng-minlength="5"
+                       ng-maxlength="50"
+                       required
+                       ng-blur="nameFocus = false"
+                       ng-focus="nameFocus = true"
+                       >                
+                <p ng-show="!nameFocus && newGroupForm.groupName.$invalid && !newGroupForm.groupName.$pristine" class="bg-danger text-center">group name must be betwen 5 and 50 characters</p>
+            </div>
         </div>
         <div class="form-group">
-            <button class="btn btn-default" ng-click="checkAvailability()">Check Availability <i ng-show="searching" class="fa fa-spinner fa-spin"></i></button>
-            
+            <label for="description" class="col-sm-3 control-label">description</label>
+            <div class="col-sm-9">
+                <textarea type="text" rows="3" 
+                          class="form-control" 
+                          name="description" 
+                          placeholder="describe the group here" 
+                          ng-model="description"
+                          ng-minlength="1"
+                          ng-maxlength="500"
+                          required>
+                </textarea>
+                <p ng-show="newGroupForm.description.$invalid && !newGroupForm.description.$pristine" class="bg-danger text-center">description is too long</p>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class ="col-sm-offset-3 col-sm-9">
+                <button type="submit" class="btn btn-primary" ng-disabled="newGroupForm.$invalid">create group <i ng-show="searching" class="fa fa-spinner fa-spin"></i></button>
+            </div>
         </div>
     </form>
 
