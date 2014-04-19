@@ -81,15 +81,16 @@ h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6{
 
 .header{
     height: 40px;
-    line-height: 40px;
+    line-height: 30px;
 }
 
 .brand{
     font-weight: 400;
     font-size: 18px;
-    padding-left: 20px;
-    padding-top: 15px;
     color: #999;
+    padding-left: 5px;
+    padding-right:5px;
+    width: 145px;
 }
 
 .header a{
@@ -100,6 +101,41 @@ h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6{
 .header a:hover{
     color: #fff;
 }
+
+
+.nav ul{
+    list-style-type: none;    
+    padding: 0;
+    margin: 5px 3px 0px;
+}
+
+.nav ul li{
+    display: inline;
+    float:left;
+    text-align: center;
+    margin-left: 3px;
+    margin-right: 3px;
+}
+
+.nav-link{
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.nav ul li a{
+    display: block;
+}
+
+.nav ul li a:hover{
+    background-color: #535353;    
+    border-radius: 8px;
+    
+    -webkit-transition: background-color ease-in-out .3s;
+    -moz-transition: background-color  ease-in-out .3s;
+    -o-transition: background-color ease-in-out .3s;
+    transition: background-color  ease-in-out .3s;
+}
+
 
 .form-width {
     max-width: 400px;
@@ -158,21 +194,6 @@ h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6{
     width: 175px;
 }
 
-
-
-.side-nav {
-    margin-top: 15px;
-    border-right: 1px solid #999;
-    text-align: center;
-}
-    
-.side-nav ul li a{
-    color: black;
-}
-.side-nav ul li a:hover{
-    color: #999;
-    background-color: white;
-}
 
 .new-group-form {
     max-width: 500px;

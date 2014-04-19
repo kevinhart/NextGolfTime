@@ -19,10 +19,13 @@ myApp.config(function ($stateProvider, $urlRouterProvider) {
         templateUrl: "partials/signout.html"
     }).state('home', {
         url:"/home",
-        templateUrl: "partials/home.html",
+        templateUrl: "partials/home.html",        
     }).state('home.new', {
         url:"/new",
         templateUrl: "partials/home-new.html"
+    }).state('home.overview', {
+        url:"/overview",
+        templateUrl: "partials/home-overview.html"
     }).state('home.schedule', {
         url:"/schedule",
         templateUrl: "partials/schedule.html"

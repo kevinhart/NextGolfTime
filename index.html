@@ -16,6 +16,11 @@
     
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    
+    
     <script src="http://ajax.aspnetcdn.com/ajax/mobileservices/MobileServices.Web-1.1.3.min.js"></script>
     <script src="js/main.js"></script>
     <script src="js/SignInCtrl.js"></script>
@@ -38,13 +43,41 @@
 </head>
 <body >
 
-<div class="header" ng-controller="HeaderCtrl">
-    <a class="brand" ng-href="{{user.validSession ? '#/home' : '#'}}">Next Golf Time</a>    
-    <span class="pull-right nudge-left">
-        <span ng-show="user.validSession">{{user.userName}} - {{user.email}}</span>
-        <a href="#/signout" ng-show="user.validSession">Sign Out</a>
-        <a href="#/signin" ng-show="!user.validSession">Sign In</a>
-    </span>
+<div class="header" ng-controller="HeaderCtrl">    
+    
+    <nav class="nav">
+        <ul>
+            <li><a ng-href="{{user.validSession ? '#/home' : '#'}}" class="brand">Next Golf Time</a></li>
+        </ul>
+
+    <!--        Navigation for XS devices-->
+        <div class="btn-group visible-xs pull-right">
+          <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+            Action <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu" role="menu">          
+            <li class = "" ng-show="user.validSession"><a ui-sref="home.overview"><i class="fa fa-home fa-fw"></i>Home</a></li>    
+              <li class = "" ng-show="user.validSession"><a ui-sref="home.groups"><i class="fa fa-group fa-fw"></i>Groups</a></li>  
+              <li class = "" ng-show="user.validSession"><a ui-sref="home.comments"><i class="fa fa-comments fa-fw"></i>Comments</a></li>
+              <li class="">
+                    <a href="#/signout" ng-show="user.validSession">Sign Out</a>
+                    <a href="#/signin" ng-show="!user.validSession" class="">Sign In</a>
+                </li>                          
+          </ul>
+        </div>      
+            
+<!--            navigation for non-phones-->
+            <ul class="hidden-xs">
+                <li class="pull-right nav-link">
+                    <a href="#/signout" ng-show="user.validSession">Sign Out</a>
+                    <a href="#/signin" ng-show="!user.validSession" class="pull-right  nav-link">Sign In</a>
+                </li>
+                <li class = "pull-right nav-link" ng-show="user.validSession">{{user.email}}</li>            
+                <li class = "pull-right nav-link" ng-show="user.validSession"><a ui-sref="home.comments"><i class="fa fa-comments fa-fw fa-lg"></i></a></li>
+                <li class = "pull-right nav-link" ng-show="user.validSession"><a ui-sref="home.groups"><i class="fa fa-group fa-fw fa-lg"></i></a></li>
+                <li class = "pull-right nav-link" ng-show="user.validSession"><a ui-sref="home.overview"><i class="fa fa-home fa-fw fa-lg"></i></a></li>
+          </ul>
+    </nav>
 </div>
 
     
