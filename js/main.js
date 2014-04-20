@@ -1,4 +1,4 @@
-var myApp = angular.module('myApp', ['ui.router']);
+var myApp = angular.module('myApp', ['ui.router', 'ui.bootstrap']);
 
 
 myApp.config(function ($stateProvider, $urlRouterProvider) {
@@ -35,6 +35,9 @@ myApp.config(function ($stateProvider, $urlRouterProvider) {
     }).state('home.groups', {
         url:"/groups",
         templateUrl: "partials/home-groups.html"
+    }).state('Group', {
+        url:"/group/:id",
+        templateUrl: "partials/group.html"
     }).state('groups-create-new', {
         url:"/groups/create-new",
         templateUrl: "partials/groups-create-new.html"

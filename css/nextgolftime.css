@@ -2,6 +2,7 @@
 body, p{
     font-family: 'Open Sans', sans-serif;
     font-weight: 300;
+    text-transform: lowercase;
 }
 
 h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6{
@@ -201,4 +202,9 @@ h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6{
 
 .no-bullets {
     list-style: none;
+}
+
+.date-picker {
+    display: inline-block;
+    min-height: 300px;
 }
