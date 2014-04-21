@@ -1,13 +1,14 @@
 angular.module('myApp').controller('NewGroupCtrl', function ($scope, $state, $timeout, User, ClientService) {
     
     $scope.loading = false;
+    $scope.privacy = 2; //semi-private
     
     $scope.createGroup = function(isValid){
         //go look in the DB and see if its available
         $scope.loading = true;
 
         ClientService.getTable("Group")
-            .insert({ name: $scope.groupName, description: $scope.description, ownerid: User.id})
+            .insert({ name: $scope.groupName, description: $scope.description, ownerid: User.id, privacylevel: $scope.privacy})
             .then(function(result){
                 console.log(JSON.stringify(result));
                 $state.go('Group', {id: result.id});                

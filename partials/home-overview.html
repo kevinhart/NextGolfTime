@@ -1,9 +1,62 @@
 <div ng-controller="HomeOverviewCtrl">
 
+
     <div class="container">
-        <h1>Overview</h1>
-    
-    
-    </div>
+
+        <div class="page-header">
+            <h1>Overview</h1>
+            <p class="text-muted">people to see, golf to play</p>
+        </div>
         
+        
+        <div class="row">
+        
+            <div class="col-sm-6">
+                <h3>Commitments</h3>
+                <p class="text-muted">events you signed up for</p>
+                <div class="" ng-show="loadingEvents">
+                    <i class="fa fa-spinner fa-spin fa-3x"></i>
+                </div>
+                <div ng-repeat="event in events">
+                    {{event.id}} - {{event.date}}
+                </div>
+            </div>
+            
+            <div class="col-sm-6">
+                <h3>Opportunities</h3>
+                <p class="text-muted">you've got options</p>
+                <div class="text-center" ng-show="loadingPossible">
+                    <i class="fa fa-spinner fa-spin fa-3x"></i>
+                </div>
+            </div>
+            
+        </div>    
+        
+        <div class="row">
+        
+            <div class="col-sm-6">
+                <h3>Groups You Own</h3>
+                <p class="text-muted">it's good to be king</p>
+                <div class="" ng-show="loadingGroups">
+                    <i class="fa fa-spinner fa-spin fa-3x"></i>
+                </div>
+                <div ng-repeat="group in groups | filter: { memberprofileid: userID }">
+                    {{group.GroupID}} - {{group.GroupName}}
+                </div>
+            </div>
+            
+            <div class="col-sm-6">
+                <h3>Affiliations</h3>
+                <p class="text-muted">they can't all be 10s</p>
+                <div class="text-center" ng-show="loadingGroups">
+                    <i class="fa fa-spinner fa-spin fa-3x"></i>
+                </div>
+                <div ng-repeat="group in groups | filter: { groupownerid: userID }">
+                    {{group.GroupID}} - {{group.GroupName}}
+                </div>
+            </div>
+            
+        </div>
+    </div>  
+
 </div>

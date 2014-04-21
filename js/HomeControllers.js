@@ -1,9 +1,53 @@
 angular.module('myApp').controller('HomeOverviewCtrl', function ($scope, $state, User, ClientService) {
-
+    
+    
+    //$scope.loading = true;
+    
+    $scope.loadingPossible = false;
+    
     //load the upcoming scheduled events
+    $scope.loadEvents = function(){
+        console.log('loading events');
+        $scope.loadingEvents = true;
+        ClientService.getTable('GroupEvent')
+                //.where({ownerID: User.id })
+                .read()
+                .then( function(result){
+                    console.log(result);
+                    $scope.events = result;
+                }, function(err){
+                    console.log("error loading events: " + err);
+                }).then(function(){
+                    console.log('done loading events');
+                    $scope.loadingEvents = false;
+                    $scope.$apply();
+                });
+    };
+    $scope.loadEvents();
     
     //load the upcoming events not in
     
+    //load the groups
+    $scope.loadGroups = function(){
+        $scope.loadingGroups = true;
+        ClientService.invokeApi('apigroupsaffiliated', 
+                                {
+                                    method: 'GET',
+                                    parameters: { userID: User.id }
+                                })
+            .then( function(result){                
+                $scope.groups = JSON.parse(result.response);
+                console.log($scope.groups);
+            }, function(err){
+                console.log("error loading groups affiliated: " + err);
+            }).then( function(){
+                console.log('done loading groups');
+                $scope.loadingGroups = false;
+                $scope.$apply();
+            });
+    };
+    
+    $scope.loadGroups();
 });
 
 

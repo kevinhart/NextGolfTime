@@ -43,6 +43,20 @@
                 <p ng-show="!nameFocus && newGroupForm.groupName.$invalid && !newGroupForm.groupName.$pristine" class="bg-danger text-center">group name must be betwen 5 and 50 characters</p>
             </div>
         </div>
+        <div class="form-group">            
+            <label class="col-sm-3 control-label">Privacy Level</label>
+            <div class="col-sm-9">
+                <label class="radio-inline" >
+                <input type="radio" name="privacy" ng-model="privacy" value="1">Public
+                </label>
+                <label class="radio-inline" >
+                    <input type="radio" name="privacy" ng-model="privacy" value="2">Semi-Private
+                </label>
+                <label class="radio-inline" >
+                    <input type="radio" name="privacy" ng-model="privacy" value="3">Private
+                </label>
+            </div>
+        </div>
         <div class="form-group">
             <label for="description" class="col-sm-3 control-label">description</label>
             <div class="col-sm-9">
