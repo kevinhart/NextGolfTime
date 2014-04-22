@@ -17,8 +17,8 @@
                 <div class="" ng-show="loadingEvents">
                     <i class="fa fa-spinner fa-spin fa-3x"></i>
                 </div>
-                <div ng-repeat="event in events">
-                    {{event.id}} - {{event.date}}
+                <div ng-repeat="event in events | filter: { SignedUp: 1}">
+                    {{event.EventName}} at {{event.EventDate | date: 'MM/dd/yyyy @ h:mma'}} by {{event.GroupName}}
                 </div>
             </div>
             
@@ -27,6 +27,9 @@
                 <p class="text-muted">you've got options</p>
                 <div class="text-center" ng-show="loadingPossible">
                     <i class="fa fa-spinner fa-spin fa-3x"></i>
+                </div>
+                <div ng-repeat="event in events | filter: { SignedUp: 0}">
+                    {{event.EventName}} at {{event.EventDate | date: 'MM/dd/yyyy @ h:mma'}} by {{event.GroupName}}
                 </div>
             </div>
             
@@ -41,7 +44,7 @@
                     <i class="fa fa-spinner fa-spin fa-3x"></i>
                 </div>
                 <div ng-repeat="group in groups | filter: { memberprofileid: userID }">
-                    {{group.GroupID}} - {{group.GroupName}}
+                    <a href="#/group/{{group.GroupID}}">{{group.GroupName}}</a>
                 </div>
             </div>
             

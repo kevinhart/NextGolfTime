@@ -9,12 +9,13 @@ angular.module('myApp').controller('HomeOverviewCtrl', function ($scope, $state,
     $scope.loadEvents = function(){
         console.log('loading events');
         $scope.loadingEvents = true;
-        ClientService.getTable('GroupEvent')
-                //.where({ownerID: User.id })
-                .read()
+        ClientService.invokeApi('api_eventmembers',{
+                    method: 'get',
+                    parameters: { userID: User.id }
+                })                
                 .then( function(result){
-                    console.log(result);
-                    $scope.events = result;
+                    $scope.events = JSON.parse(result.response);
+                    console.log($scope.events);
                 }, function(err){
                     console.log("error loading events: " + err);
                 }).then(function(){
@@ -37,7 +38,6 @@ angular.module('myApp').controller('HomeOverviewCtrl', function ($scope, $state,
                                 })
             .then( function(result){                
                 $scope.groups = JSON.parse(result.response);
-                console.log($scope.groups);
             }, function(err){
                 console.log("error loading groups affiliated: " + err);
             }).then( function(){
@@ -92,3 +92,35 @@ angular.module('myApp').controller('HomeCtrl', function ($scope, $state, User, C
         }
     }
 });
+
+
+angular.module('myApp').controller('HomeGroupCtrl', function ($scope, $state, User, ClientService) {
+
+    $scope.searching = "false";
+    $scope.search = {};
+    
+    $scope.groupSearch = function (txt){
+      
+        $scope.searching = true;
+        
+        ClientService.getTable('Group')
+            .where( function(name){
+                //can't let people search private groups
+               return this.name.indexOf(name) >= 0 && this.privacylevel < 3
+            }, txt)
+            .read()
+            .then( function(result){
+                $scope.search.results = result;
+            }, function(err){
+                console.log("error searching groups: " + err);
+            }).then( function(){
+                $scope.searching = false;
+                $scope.$apply();
+            });
+        
+    };
+
+});
+
+
+

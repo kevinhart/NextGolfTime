@@ -1,3 +1,30 @@
-<h1>Groups</h1>
 
-<a class="btn btn-primary" href="#/groups/create-new"><i class="fa fa-plus fa-fw nudge-left"></i>Create</a>
+<div ng-controller="HomeGroupCtrl">
+
+    <div class="container">
+        <h1>Groups</h1>
+
+        <h3>Want to create your own events?  Create a group</h3>
+        <a class="btn btn-primary" href="#/groups/create-new"><i class="fa fa-plus fa-fw nudge-left"></i>Create</a>
+    
+        
+        <h3>Otherwise, search for one</h3>
+        <form role="form" name="groupSearchForm">
+            <div class="form-group">
+                <label class="control-label" for="nameSearch">Group Name</label>
+                <input class="form-control" placeholder="best guess" ng-model="search.groupName" required>
+            </div>
+            <div class="form-group">
+                <button 
+                        class="btn btn-primary" 
+                        ng-disabled="groupSearchForm.$invalid" 
+                        ng-click="groupSearch(search.groupName)">Search <i ng-show="searching" class="fa fa-spinner fa-spin nudge-right"></i></button>
+            </div>
+        </form>
+        
+        <div ng-repeat="result in search.results">
+            <a href="#/group/{{result.id}}">{{result.name}}</a>
+        </div>
+    </div>
+    
+</div>

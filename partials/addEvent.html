@@ -1,57 +1,76 @@
-
+<!--<div ng-controller="AddEventCtrl">-->
 <div class="text-center" >
     <h1>Add Event</h1>
-    <p class="text-muted">because you can</p> {{groupID}}
-
-    <form  role="form" name="addEventForm" ng-submit="addEvent()" novalidate>
-        {{eventName}}
-        <div class="row">
-            <div class="col-sm-offset-1 col-sm-10">
-                <label for="eventName" class="control-label">name</label>
-                <input type="text" 
-                       class="form-control" 
-                       name="eventName" 
-                       placeholder="an event name" 
-                       ng-model="eventName"                        
-                       ng-minlength="5"
-                       ng-maxlength="50"
-                       required
-                       ng-blur="nameFocus = false"
-                       ng-focus="nameFocus = true"
-                       >                
-                <p ng-show="!nameFocus && addEventForm.eventName.$invalid && !addEventForm.eventName.$pristine" class="bg-danger text-center">event name must be betwen 5 and 50 characters</p>
-            </div>
-        </div>
-        
-        <div class="row">            
-            <div class="col-sm-offset-1 col-sm-10">
-                <div ng-model="date" class="center-block">
-                    <datepicker min="minEventDate" show-weeks=false></datepicker>
-                </div>            
-            </div>
-        </div>
-
-            
-        <div class="row">
-            <div class="col-sm-offset-1 col-sm-10">
-                <label for="description" class="control-label">description</label>            
-                <textarea type="text" rows="3" 
-                          class="form-control" 
-                          name="description" 
-                          placeholder="interesting text goes here" 
-                          ng-model="description"                          
-                          ng-maxlength="500"
-                          >
-                </textarea>
-                <p ng-show="addEventForm.description.$invalid && !addEventForm.description.$pristine" class="bg-danger text-center">description is too long</p>
-            </div>
-        </div>
-        <div class="row">
-            <div class ="col-sm-offset-4 col-sm-4">
-                <button class="btn btn-primary" type="submit" ng-disabled="addEventForm.$invalid">Add Event <i ng-show="processing" class="fa fa-spinner fa-spin"></i></button>
-            </div>
-        </div>
-    </form>
-    
-    
+    <p class="text-muted">because you can</p>
 </div>
+
+<form  role="form" class="form-horizontal" name="addEventForm" ng-submit="addEvent()" novalidate>        
+    <div class="row add-event-row">
+        <div class="col-sm-offset-1 col-sm-2">
+            <label for="eventName" class="control-label ">Name</label>
+        </div>
+        <div class="col-sm-8">
+            <input type="text" 
+                   class="form-control" 
+                   name="eventName" 
+                   placeholder="an event name" 
+                   ng-model="event.name"                        
+                   ng-minlength="5"
+                   ng-maxlength="50"
+                   required
+                   ng-blur="nameFocus = false"
+                   ng-focus="nameFocus = true"
+                   >                
+            <p ng-show="!nameFocus && addEventForm.eventName.$invalid && !addEventForm.eventName.$pristine" class="bg-danger text-center">event name must be betwen 5 and 50 characters</p>
+            <p>{{eventName}}</p>
+        </div>
+    </div>
+
+    <div class="row add-event-row">      
+        <div class="col-sm-offset-1 col-sm-2">
+            <label for="eventName" class="control-label ">Date</label>
+        </div>
+        <div class="col-sm-8 center-block text-center">
+            <div ng-model="event.date" >
+                <datepicker name="eventDate" min="minEventDate" show-weeks=false></datepicker>
+            </div>            
+        </div>
+    </div>
+
+    <div class="row add-event-row">            
+        <div class="col-sm-offset-1 col-sm-2">
+            <label for="eventTime" class="control-label">Time</label>
+        </div>
+        <div class="col-sm-8 center-block text-center">    
+
+            <div ng-model="event.date" >
+                <timepicker name="eventTime"></timepicker>
+            </div>            
+        </div>
+    </div>
+
+    <div class="row add-event-row">
+        <div class="col-sm-offset-1 col-sm-2">
+            <label for="eventName" class="control-label">Description</label>
+        </div>
+        <div class="col-sm-8">
+            <textarea type="text" rows="3" 
+                      class="form-control" 
+                      name="description" 
+                      placeholder="interesting text goes here" 
+                      ng-model="event.description"                          
+                      ng-maxlength="500"
+                      >
+            </textarea>
+            <p ng-show="addEventForm.description.$invalid && !addEventForm.description.$pristine" class="bg-danger text-center">description is too long</p>
+        </div>
+    </div>
+    <div class="row add-event-row">
+        <div class ="col-sm-offset-4 col-sm-4">
+            <button class="btn btn-primary" type="submit" ng-disabled="addEventForm.$invalid">Add Event <i ng-show="processing" class="fa fa-spinner fa-spin"></i></button>
+        </div>
+    </div>
+</form>
+
+
+<!--</div>-->

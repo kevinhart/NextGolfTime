@@ -41,6 +41,9 @@ myApp.config(function ($stateProvider, $urlRouterProvider) {
     }).state('groups-create-new', {
         url:"/groups/create-new",
         templateUrl: "partials/groups-create-new.html"
+//    }).state('event-create-new', {
+//        url:"/event/create-new",
+//        templateUrl: "partials/addEvent.html"
     });
 });
 

@@ -28,10 +28,9 @@ angular.module('myApp').controller('NewGroupCtrl', function ($scope, $state, $ti
 angular.module('myApp').controller('GroupCtrl', function ($scope, $stateParams, $state, $modal, User, ClientService){
    
     $scope.groupID = $stateParams.id;
+    $scope.user = User;
     
-    
-    
-    $scope.loadGroup = function(){
+    $scope.loadGroup = function(){        
         $scope.loading = true;
         
         ClientService.getTable('Group')
@@ -44,6 +43,21 @@ angular.module('myApp').controller('GroupCtrl', function ($scope, $stateParams, 
                 $scope.loading = false;
                 $scope.$apply();
             });
+    
+        $scope.loadingMemberInfo = true;
+        ClientService.getTable('GroupMember')
+            .where( { memberProfileID: $scope.user.id, groupID: $scope.groupID })
+            .read()
+            .then( function(result){                
+                $scope.memberInfo = result[0];
+                console.log($scope.memberInfo);
+            }, function(err){
+                console.log("error looking for group member: " + err);
+            }).then( function(){
+                $scope.loadingMemberInfo = false;
+                $scope.$apply();
+            });
+    
     }
     
     $scope.loading = true;
@@ -51,16 +65,16 @@ angular.module('myApp').controller('GroupCtrl', function ($scope, $stateParams, 
     
     
     $scope.loadEvents = function(){
-        $scope.loadingEvents = true;        
-        
+        $scope.loadingEvents = true;                
         ClientService.getTable('GroupEvent')
             .where({groupID: $scope.groupID })
-            .where(function(){
-                return this.date >= new Date();
-            }).read()
-            .then( function(result){
-                console.log($scope.events);
+//            .where(function(){
+//                return this.date >= new Date();
+//            })
+            .read()
+            .then( function(result){                
                 $scope.events = result;
+                console.log($scope.events);
             }, function(err){
                 console.log("error loading events: " + err);
             }).then(function(){
@@ -70,7 +84,7 @@ angular.module('myApp').controller('GroupCtrl', function ($scope, $stateParams, 
     }
     
     $scope.loadingEvents = true;
-    $scope.loadEvents()
+    $scope.loadEvents();
 
     
     $scope.addEvent = function(){
@@ -89,28 +103,59 @@ angular.module('myApp').controller('GroupCtrl', function ($scope, $stateParams, 
         });
     };
     
+    $scope.joinGroup = function( userID, groupID){
+        $scope.joiningGroup = true;
+        ClientService.getTable('GroupMember')
+            .insert({
+                groupID: groupID,
+                memberProfileID: userID
+            }).then(function(result){
+                $scope.memberInfo = result;                
+            }, function(err){
+                console.log("error joining group: " + err);
+            }).then(function(){
+                $scope.joiningGroup = false;
+                $scope.$apply();
+            });
+    };
+    
+     $scope.leaveGroup = function( id ){
+        $scope.leavingGroup = true;
+        ClientService.getTable('GroupMember')
+            .del({
+                id: id
+            }).then(function(result){
+                $scope.memberInfo = null;                
+            }, function(err){
+                console.log("error leaving group: " + err);
+            }).then(function(){
+                $scope.leavingGroup = false;
+                $scope.$apply();
+            });
+    };
+    
 });
 
 
 
 angular.module('myApp').controller('AddEventCtrl', function ($scope, $modalInstance, User, ClientService, groupID){
 
-    $scope.groupID = groupID;
-    
     $scope.minEventDate = new Date();
-    $scope.date = new Date();
-    
+    $scope.event = {
+        groupID: groupID,
+        date: new Date()
+    };
+        
     
     $scope.addEvent = function(){
         
         $scope.processing = true;
-            
         ClientService.getTable("GroupEvent")
             .insert({
-                groupid: $scope.groupID,
-                name: $scope.eventName,
-                date: $scope.date,
-                description: $scope.description
+                groupid: $scope.event.groupID,
+                name: $scope.event.name,
+                date: $scope.event.date,
+                description: $scope.event.description
             }).then(function(result){
                 console.log(result);
                 $modalInstance.close();
