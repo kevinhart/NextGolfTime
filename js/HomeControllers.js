@@ -1,25 +1,36 @@
 angular.module('myApp').controller('HomeOverviewCtrl', function ($scope, $state, User, ClientService) {
     
+    $scope.user = User;
+     
     
-    //$scope.loading = true;
+});
+
+
+
+
+
+angular.module('myApp').controller('HomeCtrl', function ($scope, $state, User, ClientService) {
     
-    $scope.loadingPossible = false;
+    //TBD: if not logged in, redirect to sign in
+    if(!User.validSession){
+        console.log('redirect to sign in - invalid session');
+        $state.go('signin');
+    }
     
+    $scope.user = User;
+
     //load the upcoming scheduled events
     $scope.loadEvents = function(){
-        console.log('loading events');
         $scope.loadingEvents = true;
         ClientService.invokeApi('api_eventmembers',{
                     method: 'get',
                     parameters: { userID: User.id }
                 })                
                 .then( function(result){
-                    $scope.events = JSON.parse(result.response);
-                    console.log($scope.events);
+                    $scope.events = result.result;                    
                 }, function(err){
                     console.log("error loading events: " + err);
                 }).then(function(){
-                    console.log('done loading events');
                     $scope.loadingEvents = false;
                     $scope.$apply();
                 });
@@ -37,37 +48,18 @@ angular.module('myApp').controller('HomeOverviewCtrl', function ($scope, $state,
                                     parameters: { userID: User.id }
                                 })
             .then( function(result){                
-                $scope.groups = JSON.parse(result.response);
+                $scope.groups = result.result;
             }, function(err){
                 console.log("error loading groups affiliated: " + err);
-            }).then( function(){
-                console.log('done loading groups');
+            }).then( function(){                
                 $scope.loadingGroups = false;
                 $scope.$apply();
             });
     };
     
     $scope.loadGroups();
-});
-
-
-
-
-
-angular.module('myApp').controller('HomeCtrl', function ($scope, $state, User, ClientService) {
-    
-    //TBD: if not logged in, redirect to sign in
-    if(!User.validSession){
-        console.log('redirect to sign in - invalid session');
-        $state.go('signin');
-    }
-    
-    $scope.user = User;
-    
-    $scope.groups = [];
     
     if(!User.id){
-        console.log('looking up user');
         //we need to figure out if the user profile is complete
         ClientService.getTable('Profile')
             .insert({userName: User.email})
@@ -76,7 +68,44 @@ angular.module('myApp').controller('HomeCtrl', function ($scope, $state, User, C
         });
     }
 
+    
+    
+    $scope.findEvent = function (eventID){
+        for(var i = 0; i < $scope.events.length; i++){
+            if($scope.events[i].EventID === eventID){
+                return $scope.events[i];
+            }
+        }
+    };
+    
+    $scope.addEvent = function(userID, eventID){
+        ClientService.getTable('EventMember')
+            .insert({eventID: eventID, profileID: userID})
+            .done(function (result){
+                //update the event
+                var e = $scope.findEvent(eventID);
+                e.SignedUp = 1;
+                e.EventMemberID = result.id;
+                $scope.$apply();
+            });
+    };
+    
+    
+    $scope.leaveEvent = function(eventInstanceID, eventID){
+        ClientService.getTable('EventMember')
+            .del({id:eventInstanceID})
+            .done(function (result){
+                var e = $scope.findEvent(eventID);
+                e.SignedUp = 0;
+                e.EventMemberID = null;
+                $scope.$apply();
+            });
+    };
+    
+    
     if($state.is('home')){
+        console.log("where to go from state: home");
+        
         //if there are any events, go there
         //else if there are any comments, go there
         //else if there are any groups, go there
@@ -92,6 +121,12 @@ angular.module('myApp').controller('HomeCtrl', function ($scope, $state, User, C
         }
     }
 });
+
+
+
+
+
+
 
 
 angular.module('myApp').controller('HomeGroupCtrl', function ($scope, $state, User, ClientService) {

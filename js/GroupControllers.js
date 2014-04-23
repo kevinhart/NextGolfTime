@@ -86,6 +86,25 @@ angular.module('myApp').controller('GroupCtrl', function ($scope, $stateParams, 
     $scope.loadingEvents = true;
     $scope.loadEvents();
 
+    $scope.loadMembers = function(){
+         $scope.loadingMembers = true;                
+        ClientService.invokeApi('api_groupmembers', {
+                                    method: 'GET',
+                                    parameters: { groupID: $scope.groupID }
+                                })
+            .then( function(result){                
+                $scope.members = result.result;     
+                console.log(result);
+            }, function(err){
+                console.log("error loading members: " + err);
+            }).then(function(){
+                $scope.loadingMembers = false;
+                $scope.$apply();
+            });
+    };
+    
+    $scope.loadMembers();
+    
     
     $scope.addEvent = function(){
         var modalInstance = $modal.open({
