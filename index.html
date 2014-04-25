@@ -63,26 +63,24 @@
             Action <span class="caret"></span>
           </button>
           <ul class="dropdown-menu" role="menu">          
-            <li class = "" ng-show="user.validSession"><a ui-sref="home.overview"><i class="fa fa-home fa-fw"></i>Home</a></li>    
+              <li class = "" ng-show="user.validSession"><a ui-sref="home.overview"><i class="fa fa-home fa-fw"></i>Home</a></li>    
               <li class = "" ng-show="user.validSession"><a ui-sref="home.groups"><i class="fa fa-group fa-fw"></i>Groups</a></li>  
-              <li class = "" ng-show="user.validSession"><a ui-sref="home.comments"><i class="fa fa-comments fa-fw"></i>Comments</a></li>
               <li class="">
-                    <a href="#/signout" ng-show="user.validSession">Sign Out</a>
-                    <a href="#/signin" ng-show="!user.validSession" class="">Sign In</a>
+                    <a href="#/signout" ng-show="user.validSession"><i class="fa fa-sign-out fa-fw"></i>Sign Out</a>
+                    <a href="#/signin" ng-show="!user.validSession" class=""><i class="fa fa-sign-in fa-fw"></i>Sign In</a>
                 </li>                          
           </ul>
         </div>      
             
 <!--            navigation for non-phones-->
             <ul class="hidden-xs">
-                <li class="pull-right nav-link">
-                    <a href="#/signout" ng-show="user.validSession">Sign Out</a>
-                    <a href="#/signin" ng-show="!user.validSession" class="pull-right  nav-link">Sign In</a>
+                <li class="pull-right ">
+                    <a href="#/signout" ng-show="user.validSession"><i class="fa fa-sign-out fa-fw fa-lg"></i>Sign Out</a>
+                    <a href="#/signin" ng-show="!user.validSession" class="pull-right"><i class="fa fa-sign-in fa-fw fa-lg"></i>Sign In</a>
                 </li>
-                <li class = "pull-right nav-link" ng-show="user.validSession">{{user.email}}</li>            
-                <li class = "pull-right nav-link" ng-show="user.validSession"><a ui-sref="home.comments"><i class="fa fa-comments fa-fw fa-lg"></i></a></li>
-                <li class = "pull-right nav-link" ng-show="user.validSession"><a ui-sref="home.groups"><i class="fa fa-group fa-fw fa-lg"></i></a></li>
-                <li class = "pull-right nav-link" ng-show="user.validSession"><a ui-sref="home.overview"><i class="fa fa-home fa-fw fa-lg"></i></a></li>
+                <li class = "pull-right " ng-show="user.validSession">{{user.email}}</li>            
+                <li class = "pull-right " ng-show="user.validSession"><a ui-sref="home.groups"><i class="fa fa-group fa-fw fa-lg"></i>Groups</a></li>
+                <li class = "pull-right " ng-show="user.validSession"><a ui-sref="home.overview"><i class="fa fa-home fa-fw fa-lg"></i>Home</a></li>
           </ul>
     </nav>
 </div>

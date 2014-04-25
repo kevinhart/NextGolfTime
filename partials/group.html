@@ -41,7 +41,7 @@
                     <i class="fa fa-spinner fa-spin fa-3x"></i>
                 </div>
                 <div class="row">                    
-                    <div ng-repeat="event in events | orderBy:EventDate" >                        
+                    <div ng-repeat="event in events | orderBy:'date'" >                        
                         <div class="col-xs-9">
                             <h4>{{event.date | date: "EEE '-' MMM d '@' h:mm a" }}</h4>
                             <p class="text-muted">{{event.name}}</p>                            
@@ -62,7 +62,7 @@
                     <i class="fa fa-spinner fa-spin fa-3x"></i>
                 </div>
                 <div class="row">                    
-                    <div ng-repeat="member in members | orderBy:MemberSince" >                        
+                    <div ng-repeat="member in members | orderBy:'MemberSince'" >                        
                         <div class="col-xs-12 event-list-sm">
                             <h4>{{member.MemberName}} {{member.MemberUsername}}</h4>
                             <p class="text-muted">Member since {{member.MemberSince | date: 'yyyy'}}</p>                            

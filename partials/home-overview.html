@@ -8,17 +8,17 @@
             <p class="text-muted">people to see, golf to play</p>
         </div>
         
+        <p class="text-muted">If you want more opportunities, join <a ui-sref="home.groups" href="#">more groups</a>.  You can also create events from any group you own or help manage. </p>
         
         <div class="row">
         
             <div class="col-sm-6">
                 <h3>Commitments</h3>
-                <p class="text-muted">events you signed up for</p>
                 <div class="" ng-show="loadingEvents">
                     <i class="fa fa-spinner fa-spin fa-3x"></i>
                 </div>
                 <div class="row">                    
-                    <div ng-repeat="event in events | filter: { SignedUp: 1} | orderBy:EventDate" >                        
+                    <div ng-repeat="event in events | filter: { SignedUp: 1} | orderBy:'EventDate'" >                        
                         <div class="col-xs-9">
                             <h4>{{event.EventDate | date: "EEE '-' MMM d '@' h:mm a" }}</h4>
                             <p><span class="text-muted">What:&nbsp;&nbsp;</span>{{event.EventName}}</p>
@@ -34,13 +34,12 @@
             
             <div class="col-sm-6">
                 <h3>Opportunities</h3>
-                <p class="text-muted">you've got options</p>
                 <div class="text-center" ng-show="loadingEvents">
                     <i class="fa fa-spinner fa-spin fa-3x"></i>
                 </div>
                  
                 <div class="row">                    
-                    <div ng-repeat="event in events | filter: { SignedUp: 0} | orderBy:EventDate" >                        
+                    <div ng-repeat="event in events | filter: { SignedUp: 0} | orderBy:'EventDate'" >                        
                         <div class="col-xs-9">
                             <h4>{{event.EventDate | date: "EEE '-' MMM d '@' h:mm a" }}</h4>
                             <p><span class="text-muted">What:&nbsp;&nbsp;</span>{{event.EventName}}</p>
@@ -57,31 +56,7 @@
             
         </div>    
         
-        <div class="row">
-        
-            <div class="col-sm-6">
-                <h3>Groups You Own</h3>
-                <p class="text-muted">it's good to be king</p>
-                <div class="" ng-show="loadingGroups">
-                    <i class="fa fa-spinner fa-spin fa-3x"></i>
-                </div>
-                <div ng-repeat="group in groups | filter: {GroupOwnerID : user.id }">
-                    <a href="#/group/{{group.GroupID}}">{{group.GroupName}}</a>
-                </div>
-            </div>
-            
-            <div class="col-sm-6">
-                <h3>Affiliations</h3>
-                <p class="text-muted">they can't all be 10s</p>
-                <div class="text-center" ng-show="loadingGroups">
-                    <i class="fa fa-spinner fa-spin fa-3x"></i>
-                </div>
-                <div ng-repeat="group in groups | filter: { MemberProfileID: user.id }">
-                    <a href="#/group/{{group.GroupID}}">{{group.GroupName}}</a>
-                </div>
-            </div>
-            
-        </div>
+       
     </div>  
 
 </div>

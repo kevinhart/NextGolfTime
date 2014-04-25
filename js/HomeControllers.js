@@ -158,4 +158,3 @@ angular.module('myApp').controller('HomeGroupCtrl', function ($scope, $state, Us
 });
 
 
-

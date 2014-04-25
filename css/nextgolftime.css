@@ -1,3 +1,5 @@
+/*this is added for compatibility with ui-bootstrap and bootstrap */
+.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
 
 body, p{
     font-family: 'Open Sans', sans-serif;
@@ -75,23 +77,23 @@ h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6{
     width: 100%;
 }
 
-.header, .footer {
+.header {
     background-color: #2E3137;
     color: #fff;
+    border-bottom: 2px solid #999;    
+    height: 50px;
+    line-height: 35px;
 }
 
-.header{
-    height: 40px;
-    line-height: 30px;
-}
+
 
 .brand{
     font-weight: 400;
-    font-size: 18px;
+    font-size: 24px;
     color: #999;
     padding-left: 5px;
     padding-right:5px;
-    width: 145px;
+    width: 175px;
 }
 
 .header a{
@@ -118,13 +120,14 @@ h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6{
     margin-right: 3px;
 }
 
-.nav-link{
-    padding-left: 5px;
-    padding-right: 5px;
-}
-
 .nav ul li a{
     display: block;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.nav ul li a i{
+    margin-right: 5px;
 }
 
 .nav ul li a:hover{

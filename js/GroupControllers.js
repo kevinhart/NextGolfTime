@@ -160,6 +160,12 @@ angular.module('myApp').controller('GroupCtrl', function ($scope, $stateParams, 
 angular.module('myApp').controller('AddEventCtrl', function ($scope, $modalInstance, User, ClientService, groupID){
 
     $scope.minEventDate = new Date();
+    
+    $scope.dpo = {
+        datepicker_opened: false
+    };
+    
+    
     $scope.event = {
         groupID: groupID,
         date: new Date()
@@ -174,7 +180,9 @@ angular.module('myApp').controller('AddEventCtrl', function ($scope, $modalInsta
                 groupid: $scope.event.groupID,
                 name: $scope.event.name,
                 date: $scope.event.date,
-                description: $scope.event.description
+                description: $scope.event.description,
+                location: $scope.event.location,
+                capacity: $scope.event.hasMaxCapacity ? $scope.event.capacity : null
             }).then(function(result){
                 console.log(result);
                 $modalInstance.close();
@@ -188,6 +196,13 @@ angular.module('myApp').controller('AddEventCtrl', function ($scope, $modalInsta
             
     };
 
+     $scope.openDatePicker = function($event) {
+        $event.preventDefault();
+        $event.stopPropagation();
+
+         $scope.dpo.datepicker_opened = true;
+                  
+      };
 });
                                    
                                    

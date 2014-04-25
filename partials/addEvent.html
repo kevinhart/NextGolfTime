@@ -1,10 +1,10 @@
 <!--<div ng-controller="AddEventCtrl">-->
 <div class="text-center" >
     <h1>Add Event</h1>
-    <p class="text-muted">because you can</p>
 </div>
 
 <form  role="form" class="form-horizontal" name="addEventForm" ng-submit="addEvent()" novalidate>        
+    
     <div class="row add-event-row">
         <div class="col-sm-offset-1 col-sm-2">
             <label for="eventName" class="control-label ">Name</label>
@@ -31,9 +31,28 @@
             <label for="eventName" class="control-label ">Date</label>
         </div>
         <div class="col-sm-8 center-block text-center">
+            <p class="input-group">
+                <input type = "text" 
+                       class="form-control" 
+                       datepicker-popup="dd-MMMM-yyyy" 
+                       ng-model="event.date" 
+                       is-open="dpo.datepicker_opened"
+                       min="minEventDate"
+                       show-weeks=false
+                       close-text="Close"
+                       show-button-bar= false
+                       required>
+                <span class="input-group-btn">
+                    <button class="btn btn-default" ng-click="openDatePicker($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                </span>
+            </p>
+            
+            <p ng-show="!dpo.datepicker_opened && !event.date" class="bg-danger text-center">a valid event date is required</p>
+<!--
             <div ng-model="event.date" >
                 <datepicker name="eventDate" min="minEventDate" show-weeks=false></datepicker>
             </div>            
+-->
         </div>
     </div>
 
@@ -49,9 +68,50 @@
         </div>
     </div>
 
+     
+    
     <div class="row add-event-row">
         <div class="col-sm-offset-1 col-sm-2">
-            <label for="eventName" class="control-label">Description</label>
+            <label for="capacity" class="control-label">Capacity</label>
+        </div>
+        <div class="col-sm-5">
+            <div class=" input-group">
+                <span class="input-group-addon">
+                    <input type="checkbox" ng-model="event.hasMaxCapacity">
+                </span>
+                <input type="number" 
+                          class="form-control" 
+                          name="capacity" 
+                          placeholder="max number allowed" 
+                          ng-model="event.capacity"                          
+                          ng-disabled="!event.hasMaxCapacity"
+                          >        
+            </div>
+        <p ng-show="event.hasMaxCapacity && (!event.capacity || event.capacity < 1)" class="bg-danger text-center">a value for max capacity is required</p>
+        </div>
+        
+    </div>
+    
+    <div class="row add-event-row">
+        <div class="col-sm-offset-1 col-sm-2">
+            <label for="location" class="control-label">Location</label>
+        </div>
+        <div class="col-sm-8">
+            <input type="text" 
+                      class="form-control" 
+                      name="location" 
+                      placeholder="where will the event take place" 
+                      ng-model="event.location"                          
+                      ng-maxlength="500"
+                      required
+                      >
+            <p ng-show="addEventForm.location.$invalid && !addEventForm.location.$pristine" class="bg-danger text-center">a value for location must be specified and be under 500 characters</p>
+        </div>
+    </div>
+    
+    <div class="row add-event-row">
+        <div class="col-sm-offset-1 col-sm-2">
+            <label for="location" class="control-label">Description</label>
         </div>
         <div class="col-sm-8">
             <textarea type="text" rows="3" 
