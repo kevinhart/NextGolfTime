@@ -52,7 +52,7 @@ h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6{
 
 .hero-bg {
     
-    background: url('../img/bkg_blur2.jpg');    
+    background: url('../img/bkg_blur.jpg');    
     background-repeat: no-repeat;
     background-size: cover;
     min-height: 600px;
@@ -73,15 +73,15 @@ h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6{
 {
     font-weight: 300;
     font-size: 34px;
-    margin-top: 20px;
+    margin-top: 40px;
     margin-bottom: 10px;   
 }
 
 .hero-text{
-    font-weight: 400;
-    font-size: 24px;
+    font-weight: 300;
+    font-size: 22px;
     margin-top: 20px;
-    margin-bottom: 10px; 
+    margin-bottom: 30px; 
 }
 
 .hero-btn {
@@ -102,12 +102,18 @@ h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6{
 .header {
     background-color: #2E3137;
     color: #fff;
-    border-bottom: 2px solid #999;    
+/*    border-bottom: 2px solid #999;    */
+    border-bottom: 2px solid #555555;    
     height: 50px;
     line-height: 35px;
 }
 
-
+.footer {
+    height: 100px;
+    background-color: #2E3137;
+    margin-top: 50px;
+    color: #61CDF5;
+}
 
 .brand{
     font-weight: 400;
@@ -210,7 +216,9 @@ h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6{
 }
 
 
-
+.thumbnail-lg h4 i{
+    color: #61CDF5;
+}
 
 .btn-join {
     width: 175px;
@@ -245,4 +253,33 @@ h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6{
 
 .btn-page-header {
     margin-top: 25px;
+}
+
+.text-instruction {
+    text-transform: none;
+}
+
+.thumbnail-lg {    
+    min-height: 225px;
+}
+
+
+
+.section-header {
+    margin-top: 40px;
+    margin-bottom: 30px;
+    font-size: 24px;
+    font-weight: 400;
+}
+
+.more-info {
+    margin-top: 60px;
+    margin-bottom: -10px;
+    display: block;
+    text-decoration: none;
+    color: inherit;
+}
+
+.more-info:hover{
+    color:inherit;
 }
