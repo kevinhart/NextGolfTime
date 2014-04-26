@@ -112,3 +112,11 @@ myApp.factory('User', function(ClientService) {
 
 
 
+angular.module('myApp').controller('LandingPageCtrl', function ($scope, $location, $anchorScroll) {
+    
+    $scope.goToID = function(id){
+        $location.hash(id);
+        $anchorScroll();
+    };
+    
+});

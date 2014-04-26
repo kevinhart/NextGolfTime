@@ -57,14 +57,14 @@
         </ul>
 
     <!--        Navigation for XS devices-->
-        <div class="btn-group visible-xs pull-right">
+        <div class="btn-group visible-xs pull-right nudge-left">
           <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-            Action <span class="caret"></span>
+            <i class="fa fa-bars"></i>
           </button>
           <ul class="dropdown-menu" role="menu">          
-              <li class = "" ng-show="user.validSession"><a ui-sref="home.overview"><i class="fa fa-calendar fa-fw"></i>Schedule</a></li>    
-              <li class = "" ng-show="user.validSession"><a ui-sref="home.groups"><i class="fa fa-group fa-fw"></i>Groups</a></li>  
-              <li class="">
+              <li ng-show="user.validSession"><a ui-sref="home.overview"><i class="fa fa-calendar fa-fw"></i>Schedule</a></li>    
+              <li ng-show="user.validSession"><a ui-sref="home.groups"><i class="fa fa-group fa-fw"></i>Groups</a></li>  
+              <li>
                     <a href="#/signout" ng-show="user.validSession"><i class="fa fa-sign-out fa-fw"></i>Sign Out</a>
                     <a href="#/signin" ng-show="!user.validSession" class=""><i class="fa fa-sign-in fa-fw"></i>Sign In</a>
                 </li>                          

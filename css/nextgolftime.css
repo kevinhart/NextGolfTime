@@ -5,7 +5,7 @@
 */
 
 /*this is added for compatibility with ui-bootstrap and bootstrap */
-.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
+.pagination, .carousel, .panel-title a { cursor: pointer; }
 
 body, p{
     font-family: 'Open Sans', sans-serif;
@@ -37,9 +37,6 @@ h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6{
     height: 60px;
 }
 
-.dark {
-    color: #006d4f;
-}
 
 .font-title{
     font-weight:300;
@@ -59,8 +56,6 @@ h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6{
     color: white;    
 }
 
-.hero-btn{
-}
 
 .hero-text-area{
     position: absolute;
@@ -99,29 +94,14 @@ h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6{
     width: 100%;
 }
 
+/*
 .header {
     background-color: #2E3137;
     color: #fff;
-/*    border-bottom: 2px solid #999;    */
+    border-bottom: 2px solid #999;    
     border-bottom: 2px solid #555555;    
     height: 50px;
     line-height: 35px;
-}
-
-.footer {
-    height: 100px;
-    background-color: #2E3137;
-    margin-top: 50px;
-    color: #61CDF5;
-}
-
-.brand{
-    font-weight: 400;
-    font-size: 24px;
-    color: #999;
-    padding-left: 5px;
-    padding-right:5px;
-    width: 210px;
 }
 
 .header a{
@@ -133,6 +113,54 @@ h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6{
     color: #fff;
 }
 
+.brand{
+    font-weight: 400;
+    font-size: 24px;
+    color: #999;
+    padding-left: 5px;
+    padding-right:5px;
+    width: 210px;
+}
+*/
+
+.brand{
+    font-weight: 300;
+    font-size: 24px;
+    color: #fff;
+    padding-left: 5px;
+    padding-right:5px;
+    width: 210px;
+}
+
+.header {
+    background-color: #2E3137;
+    color: #61CDF5;
+/*    border-bottom: 2px solid #999;    */
+    border-bottom: 2px solid #555555;    
+    height: 50px;
+    line-height: 35px;
+}
+
+.header a{
+    text-decoration: none;
+    color: #fff;
+}
+
+.header a:hover{
+    color: #fff;
+}
+
+.footer {    
+    background-color: #2E3137;
+    margin-top: 50px;
+    color: #61CDF5;
+    border-top: 2px solid #555555;        
+}
+
+.footer-title {
+    color: #fff;
+    font-size: 24px;
+}
 
 .nav ul{
     list-style-type: none;    
@@ -156,9 +184,10 @@ h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6{
 
 .nav ul li a i{
     margin-right: 5px;
+    color: #61CDF5;
 }
 
-.nav ul li a:hover{
+.nav ul:not(.dropdown-menu) li a:hover{
     background-color: #535353;    
     border-radius: 8px;
     
@@ -195,19 +224,19 @@ h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6{
     opacity: .65;
 }
 
-.login.facebook {
+.facebook {
     color:#3B5998;
 }
 
-.login.twitter{
+.twitter{
     color: #55ACEE;
 }
 
-.login.google{
+.google{
     color: #F90101;
 }
 
-.login.windows{
+.windows{
     color: #A200FF;    
 }
 
@@ -218,6 +247,10 @@ h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6{
 
 .thumbnail-lg h4 i{
     color: #61CDF5;
+}
+
+.thumbnail ul li{
+    padding-bottom: 10px;
 }
 
 .btn-join {
@@ -237,8 +270,6 @@ h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6{
     display: inline-block;
     min-height: 300px;
 }
-
-
 
 .add-event-row {
     padding-bottom: 10px;
@@ -283,3 +314,32 @@ h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6{
 .more-info:hover{
     color:inherit;
 }
+
+.more-info-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.more-info-link:hover{
+    text-decoration: none;
+    color: inherit;
+}
+
+.pointer{
+    cursor: pointer;
+}
+
+.social-networks {    
+    font-size: 32px;
+    margin-top: 20px;
+}
+.social-networks i{
+    padding-right: 15px;
+    padding-left:15px;
+}
+
+
+
+
+
+
