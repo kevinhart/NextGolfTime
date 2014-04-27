@@ -1,2 +1,96 @@
+<div ng-controller="ScheduleCtrl">
 
-<h1>Schedule</h1>
+
+    <div class="container">
+
+        <div class="page-header">
+            <h1>Schedule</h1>
+            <p class="text-muted">people to see, golf to play</p>
+        </div>
+        
+        <p class="text-muted">If you want more opportunities, join <a ui-sref="home.groups" href="#">more groups</a>.  You can also create events from any group you own or help manage. </p>
+        
+        <div class="row" ng-show="loadingEvents">
+            <i class="fa fa-spinner fa-spin fa-3x"></i>
+        </div>
+        
+        <div class="row text-center" ng-show="!loadingEvents">
+        
+            <div class="col-sm-6">
+                <div class="group-heading">Commitments</div>
+
+                <div ng-repeat="event in events | filter: { SignedUp: 1} | orderBy:'EventDate'" >
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="event">
+                                <div class="event-month">{{event.EventDate | date: "MMM"}}</div>
+                                <div class="event-day">{{event.EventDate | date: "dd"}} </div>
+                                <div class="event-time">
+                                    <p class="event-weekday">{{event.EventDate | date: "EEEE"}}</p>
+                                    {{event.EventDate | date: "h:mm a"}}
+                                </div>
+                                <div class="event-details">                                    
+                                    <div class="event-detail-title" >{{event.EventName | cut:true:50}}</div>
+                                    <div>
+                                        <span class="text-muted">Where:&nbsp;&nbsp;</span>
+                                        <span class="text-instruction">{{event.Location | cut:true:35}}</span>
+                                    </div>
+                                    <div>
+                                        <span class="text-muted">With:&nbsp;&nbsp;&nbsp;</span>
+                                        <span class="text-instruction">{{event.GroupName | cut:true:35}}</span>                                
+                                    </div>                        
+                                </div>      
+                                <div class="event-footer">
+                                        <a class="event-footer-link" href="#">View Event</a>
+
+                                        <a class="event-footer-link pointer" ng-click="leaveEvent(event.EventMemberID, event.EventID)">Leave Event</a>
+                                </div>   
+                            </div>                            
+                        </div>
+                    </div>
+               </div>
+
+            </div>
+            
+            <div class="col-sm-6">
+                <div class="group-heading">Opportunities</div>
+                 
+                <div ng-repeat="event in events | filter: { SignedUp: 0} | orderBy:'EventDate'" > 
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="event">
+                                <div class="event-month">{{event.EventDate | date: "MMM"}}</div>
+                                <div class="event-day">{{event.EventDate | date: "dd"}} </div>
+                                <div class="event-time">
+                                    <p class="event-weekday">{{event.EventDate | date: "EEEE"}}</p>
+                                    {{event.EventDate | date: "h:mm a"}}
+                                </div>
+                                <div class="event-details">                                    
+                                    <div class="event-detail-title" >{{event.EventName | cut:true:50}}</div>
+                                    <div>
+                                        <span class="text-muted">Where:&nbsp;&nbsp;</span>
+                                        <span class="text-instruction">{{event.Location | cut:true:35}}</span>
+                                    </div>
+                                    <div>
+                                        <span class="text-muted">With:&nbsp;&nbsp;&nbsp;</span>
+                                        <span class="text-instruction">{{event.GroupName | cut:true:35}}</span>                                
+                                    </div>                        
+                                </div>      
+                                <div class="event-footer">
+                                        <a class="event-footer-link" href="#">View Event</a>
+
+                                        <a class="event-footer-link pointer" ng-click="addEvent(event.EventMemberID, event.EventID)">Join Event</a>
+                                </div>   
+                            </div>                            
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+            
+        </div>    
+        
+       
+    </div>  
+
+</div>

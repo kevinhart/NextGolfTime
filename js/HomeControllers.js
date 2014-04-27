@@ -1,4 +1,4 @@
-angular.module('myApp').controller('HomeOverviewCtrl', function ($scope, $state, User, ClientService) {
+angular.module('myApp').controller('ScheduleCtrl', function ($scope, $state, User, ClientService) {
     
     $scope.user = User;
      

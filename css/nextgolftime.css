@@ -343,3 +343,107 @@ h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6{
 
 
 
+
+.event {
+    height: 130px;
+    min-width: 300px;
+    margin-left:15px;
+    margin-right:35px;
+    border-bottom: 2px solid #555555;
+    margin-bottom: 25px;
+}
+
+.event-month {
+    background-color: #61CDF5;
+    color: #fff;
+    height: 25px;
+    font-size: 18px;
+    font-weight: 400;
+    width: 75px;
+    position: relative;
+    top: 0px;
+    left: 0px;
+    text-align: center;
+}
+
+.event-day {
+    color: inherit;
+    background-color: #fff;
+    height: 50px;
+    width:75px;
+    position: relative;
+    top: 0px;
+    left: 0px;
+    text-align: center;
+    font-size: 36px;
+}
+
+.event-time {
+    color: inherit;
+    text-align: center;
+    border-top: 1px solid #61CDF5;
+    padding-top: 3px;
+    text-align: center;
+    position: relative;
+    top: 0px;
+    left: 0px;
+    width:75px;
+    height:25px;
+}
+
+.event-details{
+    position: relative;
+    top: -110px;
+    left: 75px;
+    color: #2E3137;
+    font-weight: 400;
+    width: 325px;
+    height: 115px;
+    padding-left: 20px;
+    padding-top: 5px;
+}
+
+.event-detail-title {
+    font-weight: 400;
+    color: #2E3137;
+    text-transform: none;
+    font-size:16px;
+    padding-bottom: 10px;
+}
+
+.event-cover {
+    z-index: 1000;
+    background-color: #000;
+    opacity: .25;
+    position: relative;
+    top: 0px;
+    left: 0px;
+}
+
+.event-footer {    
+    position:relative;
+    top:-115px;
+    left: 75px; 
+}
+
+.event-weekday {
+    font-size: 12px;
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+}
+
+.event-footer-link {
+    padding-left: 25px;
+    padding-right: 15px;
+}
+
+.group-heading {
+    font-size: 24px;
+    font-weight:300;    
+    width: 90%;
+    color: #fff;
+    background-color: #555555;
+    margin-bottom: 25px;
+    padding-left: 15px;
+        
+}

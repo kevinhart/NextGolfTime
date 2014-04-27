@@ -24,8 +24,8 @@ myApp.config(function ($stateProvider, $urlRouterProvider) {
         url:"/new",
         templateUrl: "partials/home-new.html"
     }).state('home.overview', {
-        url:"/overview",
-        templateUrl: "partials/home-overview.html"
+        url:"/schedule",
+        templateUrl: "partials/schedule.html"
     }).state('home.schedule', {
         url:"/schedule",
         templateUrl: "partials/schedule.html"
@@ -41,9 +41,6 @@ myApp.config(function ($stateProvider, $urlRouterProvider) {
     }).state('groups-create-new', {
         url:"/groups/create-new",
         templateUrl: "partials/groups-create-new.html"
-//    }).state('event-create-new', {
-//        url:"/event/create-new",
-//        templateUrl: "partials/addEvent.html"
     });
 });
 
@@ -120,3 +117,24 @@ angular.module('myApp').controller('LandingPageCtrl', function ($scope, $locatio
     };
     
 });
+
+
+angular.module('ng').filter('cut', function () {
+        return function (value, wordwise, max, tail) {
+            if (!value) return '';
+
+            max = parseInt(max, 10);
+            if (!max) return value;
+            if (value.length <= max) return value;
+
+            value = value.substr(0, max);
+            if (wordwise) {
+                var lastspace = value.lastIndexOf(' ');
+                if (lastspace != -1) {
+                    value = value.substr(0, lastspace);
+                }
+            }
+
+            return value + (tail || ' ...');
+        };
+    });
