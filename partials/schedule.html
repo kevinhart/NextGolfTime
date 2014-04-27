@@ -10,11 +10,11 @@
         
         <p class="text-muted">If you want more opportunities, join <a ui-sref="home.groups" href="#">more groups</a>.  You can also create events from any group you own or help manage. </p>
         
-        <div class="row" ng-show="loadingEvents">
+        <div class="row text-center" ng-show="loadingEvents">
             <i class="fa fa-spinner fa-spin fa-3x"></i>
         </div>
         
-        <div class="row text-center" ng-show="!loadingEvents">
+        <div class="row" ng-show="!loadingEvents">
         
             <div class="col-sm-6">
                 <div class="group-heading">Commitments</div>
