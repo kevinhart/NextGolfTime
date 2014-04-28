@@ -10,78 +10,70 @@
         
         <p class="text-muted">If you want more opportunities, join <a ui-sref="home.groups" href="#">more groups</a>.  You can also create events from any group you own or help manage. </p>
         
-        <div class="row text-center" ng-show="loadingEvents">
-            <i class="fa fa-spinner fa-spin fa-3x"></i>
+        <div class="row text-center" ng-show="loading">
+            <i class="fa fa-spinner fa-spin fa-5x"></i>
         </div>
         
-        <div class="row" ng-show="!loadingEvents">
+        <div class="row" ng-show="!loading">
         
             <div class="col-sm-6">
-                <div class="group-heading">Commitments</div>
+                <div class="group-heading">
+                          Commitments
+                </div>
 
-                <div ng-repeat="event in events | filter: { SignedUp: 1} | orderBy:'EventDate'" >
+                          
+                <div class ="no-results" ng-show="commitments.length === 0">
+                    <div class="no-results-text">Add some events by joining some of the opportunites</div>
+                </div>
+                
+                <div ng-repeat="event in commitments | orderBy:'EventDate'" ng-show="commitments.length > 0">
                     <div class="row">
                         <div class="col-xs-12">
-                            <div class="event">
-                                <div class="event-month">{{event.EventDate | date: "MMM"}}</div>
-                                <div class="event-day">{{event.EventDate | date: "dd"}} </div>
-                                <div class="event-time">
-                                    <p class="event-weekday">{{event.EventDate | date: "EEEE"}}</p>
-                                    {{event.EventDate | date: "h:mm a"}}
-                                </div>
-                                <div class="event-details">                                    
-                                    <div class="event-detail-title" >{{event.EventName | cut:true:50}}</div>
-                                    <div>
-                                        <span class="text-muted">Where:&nbsp;&nbsp;</span>
-                                        <span class="text-instruction">{{event.Location | cut:true:35}}</span>
-                                    </div>
-                                    <div>
-                                        <span class="text-muted">With:&nbsp;&nbsp;&nbsp;</span>
-                                        <span class="text-instruction">{{event.GroupName | cut:true:35}}</span>                                
-                                    </div>                        
-                                </div>      
-                                <div class="event-footer">
-                                        <a class="event-footer-link" href="#">View Event</a>
-
-                                        <a class="event-footer-link pointer" ng-click="leaveEvent(event.EventMemberID, event.EventID)">Leave Event</a>
-                                </div>   
-                            </div>                            
+                            <calendar-event
+                                month = "{{event.EventDate | date: 'MMM'}}"
+                                day = "{{event.EventDate | date: 'dd'}}"
+                                weekday = "{{event.EventDate | date: 'EEEE'}}"
+                                time = "{{event.EventDate | date: 'h:mm a'}}"
+                                name = "{{event.EventName}}"
+                                group = "{{event.GroupName}}"
+                                location = "{{event.Location}}"
+                                on-toggle = "leaveEvent(event.EventMemberID, event.EventID)"
+                                on-view = "viewEvent(event.EventID)"
+                                toggle-text = "Leave Event"
+                            >                            
+                            </calendar-event>                          
                         </div>
                     </div>
                </div>
 
             </div>
+        
             
             <div class="col-sm-6">
                 <div class="group-heading">Opportunities</div>
                  
-                <div ng-repeat="event in events | filter: { SignedUp: 0} | orderBy:'EventDate'" > 
+                <div class ="no-results" ng-show="opportunities.length === 0">
+                    <div class="no-results-text">Join or create a group to get more opportunities</div>
+                </div>
+                
+                <div ng-repeat="event in opportunities | orderBy:'EventDate'" ng-show="opportunities.length > 0"> 
                     <div class="row">
                         <div class="col-xs-12">
-                            <div class="event">
-                                <div class="event-month">{{event.EventDate | date: "MMM"}}</div>
-                                <div class="event-day">{{event.EventDate | date: "dd"}} </div>
-                                <div class="event-time">
-                                    <p class="event-weekday">{{event.EventDate | date: "EEEE"}}</p>
-                                    {{event.EventDate | date: "h:mm a"}}
-                                </div>
-                                <div class="event-details">                                    
-                                    <div class="event-detail-title" >{{event.EventName | cut:true:50}}</div>
-                                    <div>
-                                        <span class="text-muted">Where:&nbsp;&nbsp;</span>
-                                        <span class="text-instruction">{{event.Location | cut:true:35}}</span>
-                                    </div>
-                                    <div>
-                                        <span class="text-muted">With:&nbsp;&nbsp;&nbsp;</span>
-                                        <span class="text-instruction">{{event.GroupName | cut:true:35}}</span>                                
-                                    </div>                        
-                                </div>      
-                                <div class="event-footer">
-                                        <a class="event-footer-link" href="#">View Event</a>
-
-                                        <a class="event-footer-link pointer" ng-click="addEvent(event.EventMemberID, event.EventID)">Join Event</a>
-                                </div>   
-                            </div>                            
+                            
+                            <calendar-event
+                                month = "{{event.EventDate | date: 'MMM'}}"
+                                day = "{{event.EventDate | date: 'dd'}}"
+                                weekday = "{{event.EventDate | date: 'EEEE'}}"
+                                time = "{{event.EventDate | date: 'h:mm a'}}"
+                                name = "{{event.EventName}}"
+                                group = "{{event.GroupName}}"
+                                location = "{{event.Location}}"
+                                on-toggle = "addEvent(user.id, event.EventID)"
+                                on-view = "viewEvent(event.EventID)"
+                                toggle-text = "Join Event"
+                            >                            
+                            </calendar-event>
+            
                         </div>
                     </div>
                 </div>

@@ -23,9 +23,6 @@ myApp.config(function ($stateProvider, $urlRouterProvider) {
     }).state('home.new', {
         url:"/new",
         templateUrl: "partials/home-new.html"
-    }).state('home.overview', {
-        url:"/schedule",
-        templateUrl: "partials/schedule.html"
     }).state('home.schedule', {
         url:"/schedule",
         templateUrl: "partials/schedule.html"
@@ -38,6 +35,9 @@ myApp.config(function ($stateProvider, $urlRouterProvider) {
     }).state('Group', {
         url:"/group/:id",
         templateUrl: "partials/group.html"
+    }).state('Event', {
+        url:"/event/:id",
+        templateUrl: "partials/event.html"
     }).state('groups-create-new', {
         url:"/groups/create-new",
         templateUrl: "partials/groups-create-new.html"
@@ -138,3 +138,36 @@ angular.module('ng').filter('cut', function () {
             return value + (tail || ' ...');
         };
     });
+
+
+myApp.directive('calendarEvent', function(){
+   return{
+       restrict: 'E',
+       replace: 'true',
+       templateUrl: 'partials/calendarEvent.html',
+       scope: {
+            month: '@',
+            day: '@',
+            weekday: '@',
+            time: '@',
+            name: '@',
+            location: '@',
+            group: '@',
+           toggleText: '@',
+           onToggle: '&',
+           onView: '&',
+           userID: '@',
+           eventID: '@'
+       },
+        link: function(scope, elem, attrs){
+            scope.toggle = function(){
+                scope.onToggle(scope.userID, scope.eventID);
+            };
+            
+            scope.viewEvent = function(){
+                console.log("on view");
+                scope.onView(scope.eventID);
+            }
+        }
+   };
+});

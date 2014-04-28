@@ -10,7 +10,6 @@ angular.module('myApp').controller('NewGroupCtrl', function ($scope, $state, $ti
         ClientService.getTable("Group")
             .insert({ name: $scope.groupName, description: $scope.description, ownerid: User.id, privacylevel: $scope.privacy})
             .then(function(result){
-                console.log(JSON.stringify(result));
                 $state.go('Group', {id: result.id});                
             }, function (err){
                 console.log("error inserting group: " + err);
@@ -39,9 +38,8 @@ angular.module('myApp').controller('GroupCtrl', function ($scope, $stateParams, 
                 $scope.group = result;  
             }, function(err){
                 console.log("error getting group id: " + id + "  error: " + err);
-            }).then(function(){            
-                $scope.loading = false;
-                $scope.$apply();
+            }).then(function(){                             
+                $scope.loadGroupOwner();
             });
     
         $scope.loadingMemberInfo = true;
@@ -49,8 +47,7 @@ angular.module('myApp').controller('GroupCtrl', function ($scope, $stateParams, 
             .where( { memberProfileID: $scope.user.id, groupID: $scope.groupID })
             .read()
             .then( function(result){                
-                $scope.memberInfo = result[0];
-                console.log($scope.memberInfo);
+                $scope.memberInfo = result[0];                
             }, function(err){
                 console.log("error looking for group member: " + err);
             }).then( function(){
@@ -59,6 +56,20 @@ angular.module('myApp').controller('GroupCtrl', function ($scope, $stateParams, 
             });
     
     }
+    
+    $scope.loadGroupOwner = function(){        
+        
+        ClientService.getTable('Profile')
+            .lookup($scope.group.ownerid)
+            .then( function(result){                         
+                $scope.owner = result;
+            }, function(err){
+                console.log("error loading group owner: " + err);
+            }).then( function(){                
+                $scope.loading = false;
+                $scope.$apply();
+            });
+    };
     
     $scope.loading = true;
     $scope.loadGroup();
@@ -74,7 +85,6 @@ angular.module('myApp').controller('GroupCtrl', function ($scope, $stateParams, 
             .read()
             .then( function(result){                
                 $scope.events = result;
-                console.log($scope.events);
             }, function(err){
                 console.log("error loading events: " + err);
             }).then(function(){
@@ -153,6 +163,10 @@ angular.module('myApp').controller('GroupCtrl', function ($scope, $stateParams, 
             });
     };
     
+    $scope.viewEvent = function (eventID){
+        $state.go("Event", {id: eventID});
+    }
+    
 });
 
 
@@ -184,7 +198,6 @@ angular.module('myApp').controller('AddEventCtrl', function ($scope, $modalInsta
                 location: $scope.event.location,
                 capacity: $scope.event.hasMaxCapacity ? $scope.event.capacity : null
             }).then(function(result){
-                console.log(result);
                 $modalInstance.close();
             }, function(err){
                 console.log("error adding event: " + err);

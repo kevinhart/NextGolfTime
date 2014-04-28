@@ -9,7 +9,7 @@ angular.module('myApp').controller('ScheduleCtrl', function ($scope, $state, Use
 
 
 
-angular.module('myApp').controller('HomeCtrl', function ($scope, $state, User, ClientService) {
+angular.module('myApp').controller('HomeCtrl', function ($scope, $state, $filter, User, ClientService) {
     
     //TBD: if not logged in, redirect to sign in
     if(!User.validSession){
@@ -18,30 +18,47 @@ angular.module('myApp').controller('HomeCtrl', function ($scope, $state, User, C
     }
     
     $scope.user = User;
+    $scope.commitments = [];
+    $scope.opportunities = [];
 
     //load the upcoming scheduled events
     $scope.loadEvents = function(){
-        $scope.loadingEvents = true;
+        $scope.loading = true;
         ClientService.invokeApi('api_eventmembers',{
                     method: 'get',
                     parameters: { userID: User.id }
                 })                
-                .then( function(result){
-                    $scope.events = result.result;                    
+                .then( function(result){                    
+                    $scope.events = result.result;   
+                    
+                    $scope.filterEvents();
+                   
                 }, function(err){
                     console.log("error loading events: " + err);
-                }).then(function(){
-                    $scope.loadingEvents = false;
-                    $scope.$apply();
+                }).then(function(){                                        
+                    $scope.loadGroups();
                 });
+    
     };
+    
     $scope.loadEvents();
     
-    //load the upcoming events not in
+    $scope.filterEvents = function(){
+        
+        $scope.commitments.length = 0;
+        $scope.opportunities.length = 0;
+        
+        for(var i = 0; i< $scope.events.length; i++){
+            if($scope.events[i].SignedUp === 1){
+                $scope.commitments.push($scope.events[i]);
+            } else {
+                $scope.opportunities.push($scope.events[i]);
+            }
+        } 
+    }
     
     //load the groups
     $scope.loadGroups = function(){
-        $scope.loadingGroups = true;
         ClientService.invokeApi('apigroupsaffiliated', 
                                 {
                                     method: 'GET',
@@ -52,12 +69,12 @@ angular.module('myApp').controller('HomeCtrl', function ($scope, $state, User, C
             }, function(err){
                 console.log("error loading groups affiliated: " + err);
             }).then( function(){                
-                $scope.loadingGroups = false;
+                $scope.loading = false;
                 $scope.$apply();
+                $scope.redirect();
             });
     };
     
-    $scope.loadGroups();
     
     if(!User.id){
         //we need to figure out if the user profile is complete
@@ -86,6 +103,7 @@ angular.module('myApp').controller('HomeCtrl', function ($scope, $state, User, C
                 var e = $scope.findEvent(eventID);
                 e.SignedUp = 1;
                 e.EventMemberID = result.id;
+                $scope.filterEvents();
                 $scope.$apply();
             });
     };
@@ -98,28 +116,39 @@ angular.module('myApp').controller('HomeCtrl', function ($scope, $state, User, C
                 var e = $scope.findEvent(eventID);
                 e.SignedUp = 0;
                 e.EventMemberID = null;
+                $scope.filterEvents();
                 $scope.$apply();
             });
     };
     
+    $scope.viewEvent = function(eventID){
+        console.log("home ctrl view event: " + eventID);
+        $state.go("Event", "{id: eventID}");
+    };
     
-    if($state.is('home')){
-        console.log("where to go from state: home");
-        
-        //if there are any events, go there
-        //else if there are any comments, go there
-        //else if there are any groups, go there
-        // else new
-        if($scope.events && $scope.events.length > 0){
-            $state.go("home.schedule");
-        }else if($scope.comments && $scope.comments.length > 0){
-            $state.go("home.comments");
-        }if($scope.groups && $scope.groups.length > 0){
-            $state.go("home.groups");
-        }else{
-            $state.go("home.new");
+    
+    $scope.redirect = function(){
+            
+        if($state.is('home')){
+            console.log("where to go from state: home");
+            console.log($scope.events);
+            //if there are any events, go there
+            //else if there are any comments, go there
+            //else if there are any groups, go there
+            // else new
+            if($scope.events && $scope.events.length > 0){             
+                $state.go("home.schedule");
+                return;
+            }else if($scope.groups && $scope.groups.length > 0){
+                $state.go("home.groups");
+                return;
+            }else{
+                $state.go("home.new");
+                return;
+            }
         }
     }
+    
 });
 
 

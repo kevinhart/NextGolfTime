@@ -10,22 +10,25 @@
             <div class="row">                
                 <div class="col-xs-10">
                     <h1>{{group.name}}</h1>
-                    <p class="text-muted">{{group.description}}</p>
+                    <div class="text-muted">{{group.description}}</div>
+                    <div class="text-muted">Owner:&nbsp;&nbsp;<span class="text-primary">{{owner.username}}</span></div>
                 </div>
                 <div class="col-xs-2">
                     <div ng-show="loadingMemberInfo" class="text-center">
                         <i class="fa fa-spinner fa-spin fa-3x"></i>
                     </div>
 
-                    <div ng-show="!loadingMemberInfo && memberInfo" class="btn-page-header">                    
-                        <button class="btn btn-primary " ng-click="leaveGroup(memberInfo.id)">
-                            Leave <i class="fa fa-minus nudge-right" ng-show="!leavingGroup"></i>
-                                <i class="fa fa-spinner fa-spin nudge-right" ng-show="leavingGroup"></i></button>
-                    </div>                    
-                    <div ng-show="!loadingMemberInfo && !memberInfo" class="btn-page-header">                    
-                        <button class="btn btn-primary " ng-click="joinGroup(user.id, group.id)">
-                            Join <i class="fa fa-plus nudge-right" ng-show="!joiningGroup"></i>
-                                <i class="fa fa-spinner fa-spin nudge-right" ng-show="joiningGroup"></i></button>
+                    <div ng-show="!loadingMemberInfo && user.id != group.ownerid" >                    
+                        <div ng-show="memberInfo" class="btn-page-header">                    
+                            <button class="btn btn-primary " ng-click="leaveGroup(memberInfo.id)">
+                                Leave <i class="fa fa-minus nudge-right" ng-show="!leavingGroup"></i>
+                                    <i class="fa fa-spinner fa-spin nudge-right" ng-show="leavingGroup"></i></button>
+                        </div>                    
+                        <div ng-show="!memberInfo" class="btn-page-header">                    
+                            <button class="btn btn-primary " ng-click="joinGroup(user.id, group.id)">
+                                Join <i class="fa fa-plus nudge-right" ng-show="!joiningGroup"></i>
+                                    <i class="fa fa-spinner fa-spin nudge-right" ng-show="joiningGroup"></i></button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -35,34 +38,39 @@
         <div class="row">
         
             <div class="col-sm-6">
-                <h3>Upcoming Events <small><button class="btn btn-default btn-sm" ng-click="addEvent()">Create<i class="fa fa-plus nudge-right"></i></button></small></h3>
-                <p class="text-muted">things about to happen</p>
+                <div class="group-heading">Upcoming Events<a class="pointer" ng-click="addEvent()" ng-show="user.id === group.ownerid">New Event</a></div>
                 <div class="" ng-show="loadingEvents">
                     <i class="fa fa-spinner fa-spin fa-3x"></i>
                 </div>
-                <div class="row">                    
-                    <div ng-repeat="event in events | orderBy:'date'" >                        
-                        <div class="col-xs-9">
-                            <h4>{{event.date | date: "EEE '-' MMM d '@' h:mm a" }}</h4>
-                            <p class="text-muted">{{event.name}}</p>                            
+                <div ng-repeat="event in events | orderBy:'date'" >   
+                    <div class="row">                    
+                        <div class="col-xs-12">
+                            
+                            <calendar-event
+                                    month = "{{event.date | date: 'MMM'}}"
+                                    day = "{{event.date | date: 'dd'}}"
+                                    weekday = "{{event.date | date: 'EEEE'}}"
+                                    time = "{{event.date | date: 'h:mm a'}}"
+                                    name = "{{event.name}}"
+                                    group = "{{group.name}}"
+                                    location = "{{event.Location}}"
+                                    on-view = "viewEvent(event.id)"
+                            >                            
+                            </calendar-event>
                         </div>
-                        <div class="col-xs-3 text-center">
-                            <!--TBD: ability to join/leave event -->
-                        </div>
-                        <div class="col-xs-12 event-list-sm"></div>
                     </div>
                 </div>
                 
             </div>
             
             <div class="col-sm-6">
-                <h3>Members</h3>
-                <p class="text-muted">the important people</p>
+                <div class="group-heading">Members</div>
                 <div class="text-center" ng-show="activityLoading">
                     <i class="fa fa-spinner fa-spin fa-3x"></i>
                 </div>
-                <div class="row">                    
-                    <div ng-repeat="member in members | orderBy:'MemberSince'" >                        
+                              
+                <div ng-repeat="member in members | orderBy:'MemberSince'" >                        
+                    <div class="row">      
                         <div class="col-xs-12 event-list-sm">
                             <h4>{{member.MemberName}} {{member.MemberUsername}}</h4>
                             <p class="text-muted">Member since {{member.MemberSince | date: 'yyyy'}}</p>                            

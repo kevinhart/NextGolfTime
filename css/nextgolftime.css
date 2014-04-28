@@ -133,10 +133,10 @@ h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6{
 }
 
 .header {
-    background-color: #2E3137;
+    background-color: #555555;
     color: #61CDF5;
 /*    border-bottom: 2px solid #999;    */
-    border-bottom: 2px solid #555555;    
+    border-bottom: 1px solid #2E3137;    
     height: 50px;
     line-height: 35px;
 }
@@ -151,10 +151,10 @@ h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6{
 }
 
 .footer {    
-    background-color: #2E3137;
+    background-color: #555555;
     margin-top: 50px;
     color: #61CDF5;
-    border-top: 2px solid #555555;        
+    border-top: 1px solid #2E3137;        
 }
 
 .footer-title {
@@ -408,7 +408,7 @@ h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6{
     color: #2E3137;
     text-transform: none;
     font-size:16px;
-    padding-bottom: 10px;
+    padding-bottom: 15px;
 }
 
 .event-cover {
@@ -435,6 +435,7 @@ h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6{
 .event-footer-link {
     padding-left: 25px;
     padding-right: 15px;
+    font-weight: 400;
 }
 
 .group-heading {
@@ -444,6 +445,31 @@ h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6{
     color: #fff;
     background-color: #555555;
     margin-bottom: 25px;
-    padding-left: 15px;
+    padding-left: 15px;    
         
+}
+
+.group-heading a{
+    color: #61CDF5;
+    font-size: 12px;
+    margin-left: 15px;
+}
+
+.main-view-wrapper {
+    min-height: 400px;
+}
+
+.no-results {
+    background-color: #fff;
+    position: relative;
+    top: -25px;
+    width: 90%;
+    text-align: center;    
+    height: 100px;
+}
+
+.no-results-text {
+    font-size: 14px;
+    font-weight: 300;
+    padding-top: 30px;
 }

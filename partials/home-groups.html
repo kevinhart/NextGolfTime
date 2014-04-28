@@ -7,13 +7,15 @@
             <p class="text-muted">this should say something useful or witty</p>
         </div>
         
-         <div class="row">
+        <div class="text-center" ng-show="loading">
+            <i class="fa fa-spinner fa-spin fa-5x"></i>
+        </div>
+        
+         <div class="row" ng-show="!loading">
         
             <div class="col-sm-6">                
                 <h3>Groups You Own <small><a class="btn btn-default btn-sm" href="#/groups/create-new">Create<i class="fa fa-plus nudge-right"></i></a></small></h3>
-                <div class="" ng-show="loadingGroups">
-                    <i class="fa fa-spinner fa-spin fa-3x"></i>
-                </div>
+
                 <div ng-repeat="group in groups | filter: {GroupOwnerID : user.id }">
                     <a href="#/group/{{group.GroupID}}">{{group.GroupName}}</a>
                 </div>
@@ -21,9 +23,7 @@
             
             <div class="col-sm-6">
                 <h3>Affiliations</h3>
-                <div class="text-center" ng-show="loadingGroups">
-                    <i class="fa fa-spinner fa-spin fa-3x"></i>
-                </div>
+
                 <div ng-repeat="group in groups | filter: { MemberProfileID: user.id }">
                     <a href="#/group/{{group.GroupID}}">{{group.GroupName}}</a>
                 </div>

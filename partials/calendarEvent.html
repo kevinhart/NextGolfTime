@@ -1,0 +1,24 @@
+<div class="event">
+    <div class="event-month">{{month}}</div>
+    <div class="event-day">{{day}} </div>
+    <div class="event-time">
+        <p class="event-weekday">{{weekday}}</p>
+        {{time}}
+    </div>
+    <div class="event-details">                                    
+        <div class="event-detail-title" >{{name | cut:true:50}}</div>
+        <div>
+            <span class="text-muted">Where:&nbsp;&nbsp;</span>
+            <span class="text-instruction">{{location | cut:true:35}}</span>
+        </div>
+        <div>
+            <span class="text-muted">With:&nbsp;&nbsp;&nbsp;</span>
+            <span class="text-instruction">{{group | cut:true:35}}</span>                                
+        </div>                        
+    </div>      
+    <div class="event-footer">
+            <a class="event-footer-link pointer" ng-click="viewEvent()" >View Event</a>
+
+            <a class="event-footer-link pointer" ng-click="toggle()">{{toggleText}}</a>
+    </div>   
+</div> 
